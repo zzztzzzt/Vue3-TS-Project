@@ -1,12 +1,12 @@
 <script setup lang="ts">
-const props = defineProps<{
-  imageUrl: string
-}>()
+import { useSliderStore } from '@/stores/sliderStore';
+
+const sliderStore = useSliderStore();
 </script>
 
 <template>
     <div id="img-container">
-        <img id="main-img" :src="imageUrl">
+        <img id="main-img" :src="sliderStore.imageUrl">
     </div>
 </template>
 

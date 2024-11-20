@@ -1,38 +1,12 @@
 <script setup lang="ts">
-import { watch, ref } from 'vue';
+import { useSliderStore } from '@/stores/sliderStore';
 
-const props = defineProps<{
-  infoState: string
-}>()
-
-const currentInfo = ref<string>('When we see dark blue, the first thing we feel may be an emotion of calm and stability. This color is reminiscent of the night sky and the deep sea.');
-const gradientColor = ref<string>('');
-const fontColor = ref<string>('');
-watch(
-  () => props.infoState,
-  (newVal: string, oldVal: string | undefined) => {
-    if (newVal === 'infoOne') {
-        currentInfo.value = 'When we see dark blue, the first thing we feel may be an emotion of calm and stability. This color is reminiscent of the night sky and the deep sea.';
-        gradientColor.value = 'background: linear-gradient(135deg, rgba(0, 58, 140, 0.6), rgba(122, 136, 255, 0.6)); font-size: 28px;';
-        fontColor.value = 'color: #3975c4;';
-    }
-    if (newVal === 'infoTwo') {
-        currentInfo.value = 'When we see burgundy, we may first feel a pleasant and relaxing emotion, as this color is often associated with rich wines and delicious food.';
-        gradientColor.value = 'background: linear-gradient(135deg, rgba(252, 3, 98, 0.6), rgba(226, 176, 255, 0.6)); font-size: 28px;';
-        fontColor.value = 'color: #98a9eb;';
-    }
-    if (newVal === 'infoThree') {
-        currentInfo.value = 'When we see blue skies, the first emotion we usually feel is relaxation and joy. This color evokes clear skies and open spaces.';
-        gradientColor.value = 'background: linear-gradient(135deg, rgba(25, 190, 255, 0.6), rgba(105, 240, 255, 0.6)); font-size: 28px;';
-        fontColor.value = 'color: #5fdfed;';
-    }
-  }
-);
+const sliderStore = useSliderStore();
 </script>
 
 <template>
-    <div id="info-container"><div class="follow-card" :style="gradientColor">{{ currentInfo }}</div></div>
-    <div id="mobile-info" :style="fontColor">{{ currentInfo }}</div>
+    <div id="info-container"><div class="follow-card" :style="sliderStore.gradientColor">{{ sliderStore.currentInfo }}</div></div>
+    <div id="mobile-info" :style="sliderStore.fontColor">{{ sliderStore.currentInfo }}</div>
 </template>
 
 <style scoped>

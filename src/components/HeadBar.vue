@@ -1,10 +1,13 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { RouterLink, RouterView } from 'vue-router';
+</script>
 
 <template>
   <div id="head-bar">
     <a class="anchor" href="#">Logo</a>
-    <a class="anchor" href="#">information</a>
-    <a class="anchor" href="#">Login</a>
+    <RouterLink class="anchor" to="/">Information</RouterLink>
+    <!--a class="anchor" href="#">Login</a-->
+    <RouterLink class="anchor" to="/sign-in">Sign In</RouterLink>
   </div>
 </template>
 

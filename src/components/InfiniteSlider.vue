@@ -1,32 +1,14 @@
 <script setup lang="ts">
+import { useSliderStore } from '@/stores/sliderStore';
 import MainImage from './MainImage.vue';
 import MainInfo from './MainInfo.vue';
-import { ref } from 'vue'
 
-const props = defineProps<{
-  imageUrls: string[]
-}>()
-
-const imageUrl = ref<string>(props.imageUrls[0]);
-const infoState = ref<string>("infoOne");
-
-const changeToImg = (index: number): void => {
-  if (index === 0 || index === 3) {
-    imageUrl.value = props.imageUrls[0];
-    infoState.value = "infoOne";
-  } else if (index === 1 || index === 4) {
-    imageUrl.value = props.imageUrls[1];
-    infoState.value = "infoTwo";
-  } else if (index === 2 || index === 5) {
-    imageUrl.value = props.imageUrls[2];
-    infoState.value = "infoThree";
-  }
-}
+const sliderStore = useSliderStore();
 </script>
 
 <template>
-    <MainImage :image-url="imageUrl" />
-    <MainInfo :info-state="infoState"/>
+    <MainImage />
+    <MainInfo />
 
     <div class="slider" style="
         --width: 180px;
@@ -34,12 +16,12 @@ const changeToImg = (index: number): void => {
         --quantity: 6;
     ">
         <div class="list">
-            <div 
-                v-for="(imageUrl, index) in props.imageUrls" 
-                :key="index" 
-                class="item" 
-                :style="{ '--position': index + 1 }" 
-                @click="changeToImg(index)"
+            <div
+                v-for="(imageUrl, index) in sliderStore.imageUrls"
+                :key="index"
+                class="item"
+                :style="{ '--position': index + 1 }"
+                @click="sliderStore.changeToImg(index)"
             >
                 <img :src="imageUrl" alt="">
             </div>
